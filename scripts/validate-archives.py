@@ -1,0 +1,74 @@
+#!/usr/bin/env python3
+"""Check standalone archives, their references, and reproducible builds."""
+from pathlib import Path, PurePosixPath
+import argparse
+import hashlib
+import json
+import posixpath
+import re
+import subprocess
+import sys
+import zipfile
+
+root = Path(__file__).resolve().parents[1]
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--output-dir", type=Path, default=root / "dist")
+parser.add_argument("--chatgpt-name", default="meter")
+args = parser.parse_args()
+out = args.output_dir.resolve()
+version = json.loads((root / ".claude-plugin/plugin.json").read_text())["version"]
+archives = [out / f"meter-{kind}-{version}.zip" for kind in ("codex", "chatgpt", "openai-skills", "claude")]
+hashes = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in archives}
+for archive in archives:
+    with zipfile.ZipFile(archive) as z:
+        names = z.namelist()
+        assert len(names) == len(set(names)), "duplicate archive entries"
+        assert z.testzip() is None
+        # Verify what each client actually receives, including the nested Codex
+        # package in the Claude archive, rather than only checking ZIP validity.
+        skill_prefix = "" if "openai-skills" in archive.name else "skills/meter/"
+        skill_root = root / "skills/meter"
+        skill_files = {str(p.relative_to(skill_root)): p.read_bytes() for p in skill_root.rglob("*") if p.is_file()}
+        packaged_skill = {name[len(skill_prefix):] for name in names if name.startswith(skill_prefix)}
+        assert packaged_skill == set(skill_files), (archive.name, "incomplete or extra skill resources")
+        if "claude" in archive.name:
+            nested_prefix = "plugins/meter/skills/meter/"
+            nested_skill = {name[len(nested_prefix):] for name in names if name.startswith(nested_prefix)}
+            assert nested_skill == set(skill_files), (archive.name, "incomplete or extra nested skill resources")
+        for relative, expected in skill_files.items():
+            assert z.read(skill_prefix + relative) == expected, (archive.name, relative, "stale skill")
+            if "claude" in archive.name:
+                assert z.read("plugins/meter/skills/meter/" + relative) == expected, (archive.name, relative, "stale nested Codex skill")
+        for name in names:
+            assert not name.startswith("/") and ".." not in PurePosixPath(name).parts
+            assert not any(part in (".git", ".env", "node_modules", "src", "hooks") for part in PurePosixPath(name).parts)
+            if name.endswith(".md"):
+                for link in re.findall(r"\[[^\]]*\]\(([^)]+)\)", z.read(name).decode()):
+                    if "://" in link or link.startswith("#"):
+                        continue
+                    target = posixpath.normpath(posixpath.join(posixpath.dirname(name), link.split("#")[0]))
+                    assert target in names, (archive.name, name, link)
+        if "openai-skills" in archive.name:
+            assert ".mcp.json" not in names
+            assert ".codex-plugin/plugin.json" not in names
+            assert "SKILL.md" in names, "OpenAI expects a skill directory at the archive root"
+            source = root / "plugins/meter/skills/meter"
+            expected = {str(p.relative_to(source)): p.read_bytes() for p in source.rglob("*") if p.is_file()}
+            assert set(names) == set(expected), "Incomplete or extra skill archive contents"
+            for name, content in expected.items():
+                assert z.read(name) == content, (name, "skill differs from tested source")
+        else:
+            assert json.loads(z.read(".mcp.json"))["mcpServers"]["meter"]["url"] == "https://mcp.meter.ad/meter/mcp"
+        if "chatgpt" in archive.name or "codex" in archive.name:
+            source = root / "plugins/meter"
+            assert set(names) == {str(p.relative_to(source)) for p in source.rglob("*") if p.is_file()}
+            for name in names:
+                if "chatgpt" in archive.name and name == ".codex-plugin/plugin.json":
+                    expected_manifest = json.loads((source / name).read_bytes())
+                    expected_manifest["name"] = args.chatgpt_name
+                    assert json.loads(z.read(name)) == expected_manifest, "Only publisher identity may differ"
+                else:
+                    assert z.read(name) == (source / name).read_bytes(), (archive.name, name, "stale package file")
+subprocess.run([sys.executable, str(root / "scripts/package-releases.py"), "--output-dir", str(out), "--chatgpt-name", args.chatgpt_name], check=True, stdout=subprocess.DEVNULL)
+assert hashes == {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in archives}
+print("PASS: 4 standalone archives, preserved publisher identity, complete references and reproducible SHA256 hashes")

@@ -1,0 +1,39 @@
+name: Validate plugin
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    env:
+      METER_CHATGPT_NAME: app-6a9f9300f53c81918f5a07d887cb6cd8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 scripts/validate-package.py
+      - run: python3 scripts/build-openai-package.py --check
+      - run: python3 -m pip install Pillow==12.3.0
+      - run: PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v
+      - run: python3 scripts/package-releases.py --output-dir "${{ runner.temp }}/meter-packages" --chatgpt-name "$METER_CHATGPT_NAME"
+      - run: python3 scripts/validate-archives.py --output-dir "${{ runner.temp }}/meter-packages" --chatgpt-name "$METER_CHATGPT_NAME"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check skills/meter/scripts/address-program.mjs
+      - run: node --check tests/check-export-runtime.mjs
+      - run: npx --yes @anthropic-ai/claude-code@2.1.212 plugin validate .claude-plugin/plugin.json
+      - run: npx --yes @anthropic-ai/claude-code@2.1.212 plugin validate .claude-plugin/marketplace.json
+      - run: npx --yes @openai/codex@0.153.4 plugin marketplace add . --json
+      - run: npx --yes @openai/codex@0.153.4 plugin add meter@meter-public --json
+      - run: python3 scripts/validate-installed-codex.py
+      - name: Verify task workflow through installed Codex skill
+        run: |
+          package_version=$(python3 -c 'import json; print(json.load(open(".claude-plugin/plugin.json"))["version"])')
+          codex_storage="${CODEX_HOME:-$HOME/.codex}"
+          METER_WORKFLOW_SKILL_DIRECTORY="$codex_storage/plugins/cache/meter-public/meter/$package_version/skills/meter" PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p test_workflow.py -v
+      - uses: actions/upload-artifact@v4
+        with:
+          name: meter-packages
+          path: ${{ runner.temp }}/meter-packages/
