@@ -11,7 +11,7 @@ Install following the README and authenticate in the client. A METER account wit
 1. Ask for up to three inventory records in Ташкент. Expect `meter_query_surfaces`, actual existing IDs/addresses and sourced OOH/DOOH classification. Do not require a particular ID or output count when inventory changes.
 2. Request Universe in that city for ages 20–45, all genders, income abc, 1–31 August 2026. Expect `meter_universe` with the requested filters and a clearly labeled projected audience result, or an explicit coverage/access error.
 3. Request legacy OTS and Reach using exactly the IDs from case 1 and the audience/period from case 2. Expect `meter_ots_reach`; disclose actual modeled metrics, preserve surface list/period, never sum individual Reach.
-4. Request New OTS for an authorized geography. If the server returns `no_data`, expect one equivalent legacy retry with methodology disclosure unless New OTS only was requested. Errors must remain visible.
+4. Request New OTS for an authorized geography. If the server returns `no_data`, expect one equivalent legacy retry with methodology disclosure only when the task and [country guide](../skills/meter/references/country-coverage.md) permit it. Italy/IT and Morocco/MA retain unavailable New OTS without automatic legacy fallback. Errors must remain visible.
 5. Request an XLSX address program from successful calculations. Expect a real file when authoring tools are available, matching inventory counts, IDs and calculation metadata. Otherwise expect a table and an explicit file-generation limitation.
 
 ## Negative cases

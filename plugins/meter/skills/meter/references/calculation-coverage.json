@@ -1,0 +1,660 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-22",
+  "period": {
+    "from": "2026-09-01",
+    "to": "2026-09-30"
+  },
+  "verified_tools": {
+    "legacy": "meter_ots_reach",
+    "new": "meter_new_ots_reach"
+  },
+  "scope": "Successful sampled campaign calculations; recommendations, not authorization or guaranteed coverage for other cities, surfaces, audiences, periods or tools. Unlisted countries remain unverified.",
+  "countries": [
+    {
+      "code": "AE",
+      "name": "United Arab Emirates",
+      "name_ru": "ОАЭ",
+      "methods": [
+        "legacy",
+        "new"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Dubai",
+      "inventory_cities": [
+        "Abu Dhabi",
+        "Ajman",
+        "Al Ain",
+        "Dubai",
+        "Fujairah",
+        "Ras al-Khaimah",
+        "Sharjah",
+        "Umm Al Quwain"
+      ]
+    },
+    {
+      "code": "AZ",
+      "name": "Azerbaijan",
+      "name_ru": "Азербайджан",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Baku",
+      "inventory_cities": [
+        "Agdash",
+        "Baku",
+        "Bayan",
+        "Bilasuvar",
+        "Ganja",
+        "Gebele",
+        "Goychay",
+        "Hajigabul",
+        "Imishli",
+        "Ismayilli",
+        "Jalilabad",
+        "Khachmaz",
+        "Khudat",
+        "Kurdamir",
+        "Lankaran",
+        "Masalli",
+        "Mingachevir",
+        "Nakhchivan",
+        "Qakh",
+        "Quba",
+        "Sabirabad",
+        "Shabran",
+        "Shamkir",
+        "Sheki",
+        "Shirvan",
+        "Sumqayit",
+        "Ujar",
+        "Yevlakh",
+        "Zaqatala"
+      ]
+    },
+    {
+      "code": "BH",
+      "name": "Bahrain",
+      "name_ru": "Бахрейн",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Manama",
+      "inventory_cities": [
+        "Al Hamala",
+        "Al Hidd",
+        "Al Janabiya",
+        "Al Muharraq",
+        "Al Zallaq",
+        "Al salmaniya",
+        "Arad",
+        "Awali",
+        "A´ali",
+        "Budaiya",
+        "Busaiteen",
+        "Galali",
+        "Hamad Town",
+        "Isa Town",
+        "Karana",
+        "Manama",
+        "Riffa",
+        "Saar",
+        "Sakhir",
+        "Sanad",
+        "Sehla",
+        "Sitra",
+        "Tubli",
+        "Um Al Nasan Island",
+        "Zayed Town"
+      ]
+    },
+    {
+      "code": "BY",
+      "name": "Belarus",
+      "name_ru": "Беларусь",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Minsk",
+      "inventory_cities": [
+        "Babruysk",
+        "Brest",
+        "Gomel",
+        "Grodno",
+        "Minsk",
+        "Mogilev",
+        "Vitebsk"
+      ]
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "name_ru": "Германия",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Berlin",
+      "inventory_cities": [
+        "Berlin",
+        "Bremen",
+        "Cologne",
+        "Dortmund",
+        "Dusseldorf",
+        "Frankfurt am Main",
+        "Hamburg",
+        "Leipzig",
+        "Munich",
+        "Stuttgart"
+      ]
+    },
+    {
+      "code": "EG",
+      "name": "Egypt",
+      "name_ru": "Египет",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Cairo",
+      "inventory_cities": [
+        "6th of October",
+        "Alexandria",
+        "Aswan",
+        "Asyut",
+        "Beheira",
+        "Benha",
+        "Beni Suef",
+        "Cairo",
+        "El Warraq",
+        "Gharbia Governorate",
+        "Giza",
+        "Hurghada",
+        "Ismailia",
+        "Mansoura",
+        "Port Said",
+        "Qalyubiyya",
+        "Qena",
+        "Sharqia Governorate",
+        "Sheikh Zayed",
+        "Sohag",
+        "Suez",
+        "Talkha",
+        "Tanta",
+        "Zamalik"
+      ]
+    },
+    {
+      "code": "FR",
+      "name": "France",
+      "name_ru": "Франция",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Paris",
+      "inventory_cities": [
+        "Paris"
+      ]
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom",
+      "name_ru": "Великобритания",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "London",
+      "inventory_cities": [
+        "Aberdeen",
+        "Birmingham",
+        "Bracknell Forest",
+        "Bradford",
+        "Brighton and Hove",
+        "Bristol",
+        "Cardiff",
+        "Coventry",
+        "Derby",
+        "Edinburgh",
+        "Glasgow",
+        "Hull",
+        "Leeds",
+        "Leicester",
+        "Liverpool",
+        "London",
+        "Manchester",
+        "Milton Keynes",
+        "Newcastle upon Tyne",
+        "Nottingham",
+        "Plymouth",
+        "Portsmouth",
+        "Reading",
+        "Sheffield",
+        "Southampton",
+        "Southend-on-Sea",
+        "Stoke-on-Trent",
+        "Swansea",
+        "Wolverhampton",
+        "York"
+      ]
+    },
+    {
+      "code": "GE",
+      "name": "Georgia",
+      "name_ru": "Грузия",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Batumi",
+      "inventory_cities": [
+        "Bakurtsikhe",
+        "Batumi",
+        "Gori",
+        "Kutaisi",
+        "Rustavi",
+        "Tbilisi",
+        "Zugdidi"
+      ]
+    },
+    {
+      "code": "IQ",
+      "name": "Iraq",
+      "name_ru": "Ирак",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Baghdad",
+      "inventory_cities": [
+        "Al-Basrah",
+        "Baghdad",
+        "Duhok",
+        "Erbil",
+        "Najaf",
+        "Sulaymaniyah"
+      ]
+    },
+    {
+      "code": "IT",
+      "name": "Italy",
+      "name_ru": "Италия",
+      "methods": [
+        "new"
+      ],
+      "default_method": "new",
+      "verified_city": "Roma",
+      "inventory_cities": [
+        "Bologna",
+        "Firenze",
+        "Genova",
+        "Milano",
+        "Napoli",
+        "Padua",
+        "Palermo",
+        "Parma",
+        "Roma",
+        "Torino"
+      ]
+    },
+    {
+      "code": "JO",
+      "name": "Jordan",
+      "name_ru": "Иордания",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Amman",
+      "inventory_cities": [
+        "Ajloun",
+        "Al-Salt",
+        "Amman",
+        "Aqaba",
+        "Fuheis",
+        "Irbid",
+        "Jerash",
+        "Madaba",
+        "Mahis",
+        "Russeifa",
+        "Zarqa"
+      ]
+    },
+    {
+      "code": "KG",
+      "name": "Кыргызстан",
+      "name_ru": "Кыргызстан",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Бишкек",
+      "inventory_cities": [
+        "Балыкчы",
+        "Беш-Кюнгёй",
+        "Бишкек",
+        "Бостери",
+        "Гидростроитель",
+        "Джалал-Абад",
+        "Кант",
+        "Кара-Балта",
+        "Каракол",
+        "Кемин",
+        "Кызыл-Кия",
+        "Лебединовка",
+        "Ленинское",
+        "Нарын",
+        "Новопокровка",
+        "Ош",
+        "Талас",
+        "Токмак",
+        "Чолпон-Ата"
+      ]
+    },
+    {
+      "code": "KW",
+      "name": "Kuwait",
+      "name_ru": "Кувейт",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Kuwait City",
+      "inventory_cities": [
+        "Al Ahmadi",
+        "Al Farwaniyah",
+        "Al Jahra",
+        "Hawalli",
+        "Kuwait City"
+      ]
+    },
+    {
+      "code": "KZ",
+      "name": "Казахстан",
+      "name_ru": "Казахстан",
+      "methods": [
+        "legacy",
+        "new"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Алматы",
+      "inventory_cities": [
+        "Актау",
+        "Актобе",
+        "Алатау",
+        "Алматы",
+        "Астана",
+        "Атырау",
+        "Балхаш",
+        "Жанаозен",
+        "Жезказган",
+        "Житикара",
+        "Караганда",
+        "Каскелен",
+        "Кентау",
+        "Кокшетау",
+        "Костанай",
+        "Косшы",
+        "Кызылорда",
+        "Павлодар",
+        "Петропавловск",
+        "Рудный",
+        "Сарыагаш",
+        "Сатбаев",
+        "Семей",
+        "Степногорск",
+        "Талгар",
+        "Талдыкорган",
+        "Тараз",
+        "Темиртау",
+        "Туркестан",
+        "Уральск",
+        "Усть-Каменогорск",
+        "Шымкент",
+        "Экибастуз"
+      ]
+    },
+    {
+      "code": "MA",
+      "name": "Morocco",
+      "name_ru": "Марокко",
+      "methods": [
+        "new"
+      ],
+      "default_method": "new",
+      "verified_city": "Casablanca",
+      "inventory_cities": [
+        "Casablanca",
+        "Fez",
+        "Marrakech",
+        "Rabat",
+        "Salé",
+        "Tangier"
+      ]
+    },
+    {
+      "code": "OM",
+      "name": "Oman",
+      "name_ru": "Оман",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Muscat",
+      "inventory_cities": [
+        "Al Batinah North",
+        "Al Batinah South",
+        "Al Buraymi",
+        "Al Dhahira",
+        "Ash Sharqiyah North",
+        "Ash Sharqiyah South",
+        "Dhofar",
+        "Muscat"
+      ]
+    },
+    {
+      "code": "PK",
+      "name": "Pakistan",
+      "name_ru": "Пакистан",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Islamabad",
+      "inventory_cities": [
+        "Islamabad",
+        "Karachi",
+        "Lahore"
+      ]
+    },
+    {
+      "code": "PL",
+      "name": "Poland",
+      "name_ru": "Польша",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Warsaw",
+      "inventory_cities": [
+        "Bialystok",
+        "Bydgoszcz",
+        "Czestochowa",
+        "Gdansk",
+        "Gdynia",
+        "Katowice",
+        "Krakow",
+        "Lodz",
+        "Lubin",
+        "Lublin",
+        "Opole",
+        "Poznan",
+        "Sopot",
+        "Szczecin",
+        "Torun",
+        "Warsaw",
+        "Wroclaw",
+        "Zyrardow"
+      ]
+    },
+    {
+      "code": "QA",
+      "name": "Qatar",
+      "name_ru": "Катар",
+      "methods": [
+        "legacy",
+        "new"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Doha",
+      "inventory_cities": [
+        "Doha"
+      ]
+    },
+    {
+      "code": "SA",
+      "name": "Saudi Arabia",
+      "name_ru": "Саудовская Аравия",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Riyadh",
+      "inventory_cities": [
+        "Abha",
+        "Al Bahah",
+        "Al Kharj",
+        "Al Qurayyat",
+        "Arar",
+        "Buraydah",
+        "Dammam",
+        "Hail",
+        "Jazan",
+        "Jeddah",
+        "Jubail",
+        "Khamis Mushait",
+        "Khobar",
+        "Mecca",
+        "Medina",
+        "Riyadh",
+        "Sakaka",
+        "Tabuk",
+        "Unaizah",
+        "Yanbu"
+      ]
+    },
+    {
+      "code": "TJ",
+      "name": "Таджикистан",
+      "name_ru": "Таджикистан",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Душанбе",
+      "inventory_cities": [
+        "Душанбе",
+        "Худжанд"
+      ]
+    },
+    {
+      "code": "TR",
+      "name": "Turkey",
+      "name_ru": "Турция",
+      "methods": [
+        "legacy"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Istanbul",
+      "inventory_cities": [
+        "Ankara",
+        "Aydin",
+        "Balıkesir",
+        "Bodrum",
+        "Bursa",
+        "Canakkale",
+        "Cankiri",
+        "Erzurum",
+        "Gaziantep",
+        "Istanbul",
+        "Izmir",
+        "Izmit",
+        "Mugla",
+        "Samsun",
+        "Tekirdag"
+      ]
+    },
+    {
+      "code": "UZ",
+      "name": "Узбекистан",
+      "name_ru": "Узбекистан",
+      "methods": [
+        "legacy",
+        "new"
+      ],
+      "default_method": "legacy",
+      "verified_city": "Ташкент",
+      "inventory_cities": [
+        "Алмалык",
+        "Ангрен",
+        "Андижан",
+        "Асака",
+        "Ахангаран",
+        "Бекабад",
+        "Бука",
+        "Булокбоши",
+        "Бухара",
+        "Гиждуван",
+        "Гулистан",
+        "Дангара",
+        "Денау",
+        "Джизак",
+        "Заамин",
+        "Зарафшан",
+        "Ибрат",
+        "Каган",
+        "Карши",
+        "Касан",
+        "Каттакурган",
+        "Келес",
+        "Кибрай",
+        "Китаб",
+        "Коканд",
+        "Кувасай",
+        "Кунград",
+        "Маликрабат",
+        "Маргилан",
+        "Навои",
+        "Наманган",
+        "Нукус",
+        "Нурафшан",
+        "Паркент",
+        "Риштан",
+        "Самарканд",
+        "Сариасия",
+        "Тахиаташ",
+        "Ташкент",
+        "Термез",
+        "Туракурган",
+        "Турткуль",
+        "Ургенч",
+        "Ургут",
+        "Фергана",
+        "Хива",
+        "Чарвак",
+        "Чиракчи",
+        "Чирчик",
+        "Чуст",
+        "Шахрисабз",
+        "Шахрихан",
+        "Яккабаг",
+        "Янгиер",
+        "Янгиюль"
+      ]
+    }
+  ]
+}
