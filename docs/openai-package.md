@@ -34,7 +34,7 @@ For a development connection, use ChatGPT's supported custom MCP/plugin setup an
 - “Use those exact IDs to calculate legacy OTS and Reach for 1–31 August 2026. Keep the audience unchanged.”
 - “Create an XLSX address program with campaign totals and a numbered city map matching those exact IDs.”
 
-Use geography covered by your METER account. The skill checks current tool schemas, labels the calculation methodology, treats no_data as unavailable, and only tries legacy fallback when allowed by the request. Spreadsheet creation needs file-authoring tools in the client; otherwise the assistant must say it returned a table, not an XLSX.
+Use geography covered by your METER account. The [country guide](../skills/meter/references/country-coverage.md) records dated combined OTS/Reach examples for 24 countries: with no explicit method, Italy and Morocco use New OTS and the other 22 use legacy. Explicit methods are preserved; unlisted geos remain unverified. The skill checks current tool schemas, labels the calculation methodology, treats no_data as unavailable, and only tries legacy fallback when allowed by the request and country guidance. IT/MA have no automatic legacy fallback after their zero legacy audit results. Spreadsheet creation needs file-authoring tools in the client; otherwise the assistant must say it returned a table, not an XLSX.
 
 Client-ready address programs include a map unless the user requests a table-only export. The map and address table use the same sourced coordinates and sequence-to-ID mapping. Missing map inputs or tools must be disclosed; the public package supplies no monitoring heatmap or operator prices. See [Excel export requirements](../skills/meter/references/excel-export.md).
 

@@ -44,7 +44,9 @@ Client-ready address programs include a city map whose point numbers match the i
 
 ## Calculation behavior
 
-There are 16 METER tools. Legacy OTS is used when New OTS coverage is unknown. New OTS availability varies by geography and inventory. A `no_data` result means data is unavailable for that request, not zero; when permitted by the brief, the skill tries legacy once and names the methodology used.
+There are 16 METER tools. The [dated country guide](skills/meter/references/country-coverage.md) contains verified combined OTS/Reach examples in **24 countries**: legacy in 22 and New OTS in 6, with four countries represented in both. Without an explicit method, Italy and Morocco use New OTS; the other 22 use legacy. An explicit methodology is preserved. This is sampled API evidence from 22 October 2026 for September 2026, not live coverage or a guarantee for every city, surface, audience, period or other endpoint. Access still depends on the account and country subscription; other countries remain unverified rather than prohibited.
+
+A `no_data` result means data is unavailable for that request, not zero. When permitted by the brief and country guidance, the skill tries equivalent legacy once and names the method used. Italy and Morocco have no automatic legacy fallback because their audited legacy results were zero. HTTP 200 with zero metrics does not establish working calculation coverage. An optional offline [routing helper](skills/meter/references/country-coverage.md#optional-local-routing-helper) makes the same recommendation without calling METER or granting access.
 
 Campaign Reach optimization compares whole-program calculations under a persisted brief. The optional local ledger checker detects changed requests and selects the best recorded feasible result; it is not a hosted optimizer or proof of global optimality. See [campaign planning](skills/meter/references/campaign-planning.md).
 
@@ -62,13 +64,13 @@ First identify the requested connection and the failing layer. A different METER
 - **Subscription required:** open [Wallet](https://window.wallet.meter.ad/plugin), check the licensed user and country, and purchase or fund the recorded payer for renewal. Reinstalling or signing in repeatedly does not activate a license.
 - **Wallet verification unavailable:** try again shortly; an outage does not grant temporary data access.
 - **Access denied / invalid country scope:** ask your METER administrator to check your existing account's tool and country permissions. Installing again does not grant permissions.
-- **New OTS no_data:** use legacy if the task permits; do not invent metrics.
+- **New OTS no_data:** consult the country guide. Use equivalent legacy once if the task permits; IT/MA retain the unavailable result without automatic legacy fallback. Do not invent metrics.
 - **Timeout:** narrow the inventory/period or try later. Avoid repeating an unchanged request automatically.
 - **Incomplete inventory:** finish pagination or narrow the query before producing a final program.
 
 ## Data and security
 
-The package contains instructions, branding, one HTTPS MCP configuration and optional local helpers for campaign validation, budgets, XLSX exports and diagnostics. Helpers use no network or credentials; export helpers write only explicitly named new local outputs. The package installs no executable hooks, local MCP server or database connector. Calculation inputs and results pass between your assistant client and METER. Authentication is handled through OAuth; never put passwords or tokens in prompts or GitHub issues. See [data handling](docs/data-handling.md) and [security reporting](SECURITY.md).
+The package contains instructions, branding, one HTTPS MCP configuration and optional local helpers for country routing, campaign validation, budgets, XLSX exports and diagnostics. Helpers use no network or credentials; export helpers write only explicitly named new local outputs. The package installs no executable hooks, local MCP server or database connector. Calculation inputs and results pass between your assistant client and METER. Authentication is handled through OAuth; never put passwords or tokens in prompts or GitHub issues. See [data handling](docs/data-handling.md) and [security reporting](SECURITY.md).
 
 ## Development and review
 

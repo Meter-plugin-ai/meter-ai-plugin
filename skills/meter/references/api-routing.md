@@ -1,5 +1,11 @@
 # METER API v4 routing
 
+## Country and methodology
+
+Read [country coverage](country-coverage.md) before choosing the combined campaign OTS/Reach tool. The dated 24-country recommendations choose `meter_new_ots_reach` for Italy/IT and Morocco/MA and `meter_ots_reach` for the other 22 countries when no method was requested. Four countries (UZ, KZ, AE, QA) have verified examples for both methods and retain legacy as the reference default. Preserve an explicitly requested method, disclose whether its country/method pair was verified, and report the actual response; the table is advisory and does not block explicit calls or grant access.
+
+Unlisted countries remain unverified. If no current evidence or explicit method is available, legacy may be used as an initial probe with that limitation disclosed; it is not confirmed coverage. Use the actual localized city string from inventory: an alias does not translate or canonicalize an API city input. The audit covers combined campaign OTS/Reach only, not Universe, per-surface, broadcast, profile, low-level New OTS or export operations.
+
 ## Inventory and setup
 
 - `meter_query_surfaces`: look up known inventory by id, city, description, or address.
@@ -29,7 +35,7 @@ Do not infer campaign mode only because broadcast fields are populated; the `bro
 
 ## Legacy OTS calculations
 
-Legacy OTS provides broad geographic coverage and is the default when New OTS support is unknown or unavailable.
+Legacy OTS has verified combined OTS/Reach examples in 22 countries and is their reference default when no method is requested. Italy/IT and Morocco/MA default to New OTS because their audited legacy examples returned zero metrics. Follow [country coverage](country-coverage.md) rather than assuming legacy works everywhere.
 
 - `meter_ots_reach`: campaign OTS and reach using the legacy methodology.
 - `meter_ots_reach_by_surface`: legacy reach and impressions split by surface.
@@ -49,9 +55,9 @@ Important field differences:
 | `normalize_coeff` | `normalizeCoeff` |
 | methodology selected by `/new-ots/ots-reach` | `reachModel: nbd-dirichlet` on `/ots-reach` |
 
-When New OTS returns `status: no_data` for an otherwise valid request, retry the equivalent legacy request once unless the user explicitly requires New OTS. Do not describe the New OTS endpoint as broken if legacy succeeds; report that the new methodology is unavailable for that geography or inventory. Do not silently mix results from the two methodologies.
+When New OTS returns `status: no_data` for an otherwise valid request, retry the equivalent legacy request once only when the brief permits legacy and the country guidance permits automatic fallback. **For Italy/IT and Morocco/MA, retain the unavailable New OTS result; do not automatically fall back to legacy, whose audited examples were zero.** An explicitly requested legacy calculation still remains a legacy calculation and may be attempted with its verification gap disclosed. For a legacy-verified country, preserve the setup in the permitted single retry. For an unlisted country, any permitted legacy probe remains unverified. Do not describe the New OTS endpoint as broken if legacy succeeds or silently mix results from the two methodologies.
 
-The normalized HTTP `400`, `ok: false`, `data.status: no_data` response is also an explicit missing-coverage signal. Preserve audience, surfaces, dates and campaign controls in any permitted fallback. Other HTTP errors, invalid parameters and zero metrics are not evidence of missing coverage and must not trigger this fallback.
+The normalized HTTP `400`, `ok: false`, `data.status: no_data` response is also an explicit missing-coverage signal. Preserve audience, surfaces, dates and campaign controls in any permitted fallback. Other HTTP errors, invalid parameters and zero metrics are not evidence of missing coverage and must not trigger this fallback. HTTP 200 with zero OTS, Universe and Reach is not confirmation of a working positive calculation; retain the actual zero result and its limitations instead of marking the geo verified.
 
 The API's echoed `request` object can be empty even when a calculation succeeds, so it is not a reliable record of submitted parameters. A `date` inside `statistic` can reflect response/calculation timing rather than the requested reporting period; retain the submitted period when labeling results.
 

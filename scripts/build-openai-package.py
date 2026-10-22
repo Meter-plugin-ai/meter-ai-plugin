@@ -27,7 +27,7 @@ manifest.update({
     "interface": {
         "displayName": "METER",
         "shortDescription": "OOH audience and planning",
-        "longDescription": "METER helps media planners discover OOH/DOOH inventory, calculate projected audience Universe, OTS and Reach, and prepare address programs from validated results. A connected METER account with access to the requested country is required. New OTS coverage varies; unavailable results are disclosed and legacy is used only when the task permits. Spreadsheet exports require file-authoring tools in the client. METER does not book or purchase advertising placements.",
+        "longDescription": "METER helps media planners discover OOH/DOOH inventory, calculate projected audience Universe, OTS and Reach, and prepare address programs from validated results. A connected METER account with access to the requested country is required. Dated routing examples cover 24 countries; Italy and Morocco default to New OTS and the other 22 to legacy. Explicit methods are preserved; other geos remain unverified. Unavailable results and country-specific fallback limits are disclosed. Spreadsheet exports require file-authoring tools in the client. METER does not book or purchase advertising placements.",
         "developerName": "GEOMOTIVE",
         "category": "Data & Analytics",
         "capabilities": ["Read"],
