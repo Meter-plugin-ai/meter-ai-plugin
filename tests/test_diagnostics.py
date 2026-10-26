@@ -64,6 +64,18 @@ class DiagnosticTests(unittest.TestCase):
         self.assertEqual(kind(value)["kind"], "upstream_http_error")
         self.assertNotIn("reconnect", kind(value)["next_action"])
 
+    def test_generic_inventory_denial_does_not_prescribe_permission_or_oauth_changes(self):
+        value = fixture({"error": {"code": -32600, "message": "Tool access denied."}},
+                        tool="meter_query_surfaces", layer="mcp_rpc")
+        result = kind(value)
+        self.assertEqual(result["next_action"], "inspect_request_scope_then_access")
+        self.assertEqual(result["api_probe"], "not_established")
+        self.assertFalse(result["repeat_identical"])
+        self.assertFalse(result["legacy_fallback_allowed"])
+        # A known MCP transport authentication failure remains a sign-in issue.
+        value["observation"].update(layer="mcp_transport", http_status=401, target="mcp_endpoint")
+        self.assertEqual(kind(value)["next_action"], "reconnect_requested_connection")
+
     def test_site_root_404_is_not_a_failed_mcp_route(self):
         value = fixture({"body": "404 Not Found nginx"}, layer="mcp_transport")
         value["observation"].update(http_status=404, target="site_root")

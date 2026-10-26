@@ -115,7 +115,8 @@ def classify(observation, legacy_allowed):
         if code == -32602:
             return set_kind("invalid_arguments", "correct_same_tool_request")
         if code == -32600 and message == "Tool access denied.":
-            return set_kind("access_denied", "check_account_and_country_access")
+            # Geography resolution and permission failures share this message.
+            return set_kind("access_denied", "inspect_request_scope_then_access")
         if code == -32600 and message == "Wallet subscription verification is unavailable. Retry shortly.":
             return set_kind("subscription_verification_unavailable", "retry_subscription_check_later")
         if code == -32600 and isinstance(message, str) and re.fullmatch(
