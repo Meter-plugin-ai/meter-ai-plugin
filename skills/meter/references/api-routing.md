@@ -8,7 +8,7 @@ Unlisted countries remain unverified. If no current evidence or explicit method 
 
 ## Inventory and setup
 
-- `meter_query_surfaces`: look up known inventory by id, city, description, or address.
+- `meter_query_surfaces`: send `countryCode` plus a real surface `id` or exact inventory `city`; description and address only refine that scope. For national searches/counts, pagination and generic access-denied errors, follow [inventory-requests.md](inventory-requests.md).
 - `meter_collect_surfaces`: select and rank surfaces under audience, geography, and campaign constraints.
 - `meter_universe`: calculate the projected audience Universe for filters before interpreting ratings or reach.
 
