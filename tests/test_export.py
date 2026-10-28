@@ -104,6 +104,23 @@ class ExportPreparationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "country differs"):
             export.prepare(ledger, model)
 
+    def test_duplicate_conflicting_countries_require_review_in_either_order(self):
+        for first, second in (("Uzbekistan", "Kazakhstan"), ("Kazakhstan", "Uzbekistan")):
+            ledger, model = fixture()
+            model["records"][0]["country"] = first
+            model["records"].append({"id": 1, "country": second})
+            with self.subTest(first=first), self.assertRaisesRegex(ValueError, "require review"):
+                export.prepare(ledger, model)
+
+    def test_duplicate_localized_names_require_iso_on_each_record(self):
+        model = inventory_fixture()
+        model["records"][0].update(country="Uzbekistan", cntry="UZ")
+        model["records"].append({"id": 1, "country": "Узбекистан", "cntry": "UZ"})
+        self.assertTrue(budget.calculate(model)["rows"][0]["planning_eligible"])
+        del model["records"][-1]["cntry"]
+        with self.assertRaisesRegex(ValueError, "require review"):
+            budget.calculate(model)
+
     def test_single_source_order_and_final_campaign_result(self):
         ledger, model = fixture()
         bundle = export.prepare(ledger, model)

@@ -142,6 +142,13 @@ def normalize(records, overrides, dimension_unit):
         if coordinate_conflict:
             warnings.append("conflicting_map_coordinates")
         conflicting = [field for field, entries in values.items() if len(entries) > 1 and field not in ("lat", "lng")]
+        country_sources = [s for s in sources if isinstance(s.get("country"), str) and s["country"].strip()]
+        country_names = {s["country"].strip().casefold() for s in country_sources}
+        # Different localized names are comparable only when every named record
+        # carries the same valid ISO code. Never infer a translation from one row.
+        codes = [str(s.get("cntry") or "").strip().upper() for s in country_sources]
+        if len(country_names) > 1 and not (all(re.fullmatch(r"[A-Z]{2}", code) for code in codes) and len(set(codes)) == 1):
+            conflicting.append("country")
         if conflicting:
             review.append("conflicting_metadata:" + ",".join(sorted(conflicting)))
         evidence = flags | type_classes
