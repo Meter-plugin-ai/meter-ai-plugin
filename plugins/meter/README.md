@@ -1,8 +1,8 @@
 # METER for ChatGPT and Codex
 
-Use METER to discover OOH/DOOH inventory, calculate projected Universe, OTS and Reach, and prepare address programs from validated results. A METER account and an active Plugin subscription are required: **$599 per user, per country, per month**. [Purchase or manage the subscription in Wallet](https://window.wallet.meter.ad/plugin), then sign in to the assistant with the same METER account. Installing this package does not grant service or data access.
+Use an existing METER account to research OOH/DOOH inventory, calculate projected Universe, OTS and Reach, and prepare analytical address programs from validated results. Access depends on the signed-in account's existing entitlements for the requested tools and country. Installing this package does not grant service or data access.
 
-Wallet displays the licensed user, country, payer, paid period and final top-up quote. Team payment covers the selected user only and respects the team budget. Countries renew independently; cancellation takes effect at the paid period end. A subscription-required message needs a Wallet action; OAuth reconnection is only for authentication failure. If Wallet verification is temporarily unavailable, retry later.
+This plugin does not sell subscriptions, promote upgrades, provide checkout or payments, buy or book placements, or serve advertisements. If a capability is unavailable, explain the existing-access limitation and contact the account administrator. For temporary entitlement-verification failure, retry later; repeat OAuth sign-in only for an authentication failure.
 
 ## Codex installation
 
@@ -22,6 +22,8 @@ The configured server is `https://mcp.meter.ad/meter/mcp`. No API key, server pr
 For missing tools, multiple METER entries, failed calls or version questions, use the [diagnostics guide](skills/meter/references/diagnostics.md). Identify this package's connection before using a prefixed tool. A separate QA connector or conversation result is not an installed duplicate. The embedded version resource identifies the containing files; the installed package, loaded skill and MCP server versions require their own observations. The optional local classifier reads one retained snapshot without network calls, retries or changes to the client.
 
 ## ChatGPT preparation
+
+The bundled [reviewer runbook](docs/reviewer-test-runbook.md) contains the exact submitted prompts and expected behavior.
 
 METER's complete OpenAI package includes listing text, logo, the public MCP endpoint and the bundled skill. The publisher uploads the complete `meter-chatgpt-VERSION.zip` to the existing OpenAI plugin, verifies the imported metadata and MCP connection, completes review, and publishes the approved version. Uploading the standalone skills archive alone does not deliver branding or connect the service. This repository is not evidence of directory approval.
 

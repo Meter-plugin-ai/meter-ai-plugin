@@ -1,5 +1,12 @@
 # OpenAI submission preparation
 
+## Resubmission preparation — 7 November 2026
+
+OpenAI rejected the submitted 1.0.2 review on 6 November for test-case correctness and apparent digital commerce. Version 1.0.4 removes prices and transactional subscription guidance from the client and declares analytical existing-account access only. The canonical five positive and three negative cases now generate the reviewer runbook and package metadata; all campaign assumptions are explicit and New OTS fallback is conditional.
+
+This is preparation, not a claim of reviewer readiness or resubmission. Direct owner-account MCP probes returned results for the original five positive cases and confirmed legacy date/audience sensitivity; they do not replace dedicated-reviewer OAuth or ChatGPT web/mobile replay. The hosted MCP also needs the corresponding neutral instruction/status/error release. Verify deployment, reviewer replay, current demo and portal scans before sending again. Earlier submission/status records below are historical and must not override the current portal.
+
+
 METER uses one complete plugin submission for the shared ChatGPT/Codex directory. Upload the complete `meter-chatgpt-VERSION.zip` to the existing METER publisher draft. It contains `.codex-plugin/plugin.json`, `.mcp.json`, branding assets and the METER skill with its references and helpers. The public endpoint is `https://mcp.meter.ad/meter/mcp`. A separate development connection is not automatically replaced by a directory publication.
 
 ## Prepared files
@@ -58,7 +65,7 @@ Confirmation of privacy-policy coverage, dedicated reviewer access with sample d
 
 The public privacy page was rechecked on 8 September: it still identifies METER IT LLC as controller and describes website, contact and service data. It does not explicitly describe the MCP integration's OAuth account information, tool inputs/results or their exchange with the selected AI client. Explain the applicable roles of METER IT LLC and GEOMOTIVE LTD and publish accurate service-specific information before review; this repository does not infer controller roles or make retention or data-use commitments on the publisher's behalf.
 
-No official OpenAI application has been submitted. Reviewer credentials and permissions have not been changed. The service remains protected by OAuth and existing METER access controls.
+At the historical September checkpoint, no official OpenAI application had been submitted. Reviewer credentials and permissions had not been changed. The service remains protected by OAuth and existing METER access controls.
 
 ## Official references
 

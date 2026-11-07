@@ -1,7 +1,7 @@
 {
   "name": "meter",
-  "version": "1.0.3",
-  "description": "Plan outdoor advertising with METER: discover OOH/DOOH inventory, calculate projected audience, OTS and Reach, and prepare address programs. Requires a METER account and a $599/month Plugin subscription per user per country.",
+  "version": "1.0.4",
+  "description": "Use an existing METER account to research OOH/DOOH inventory and calculate projected audience, OTS and Reach. Provides analytical planning only; no advertising placement, subscription purchase, upgrade or payment workflow.",
   "author": {
     "name": "METER",
     "url": "https://meter.ad"

@@ -48,7 +48,9 @@ class DiagnosticTests(unittest.TestCase):
     def test_rpc_errors_share_code_but_need_actual_reason(self):
         cases = [("Tool access denied.", "access_denied"),
                  ("Wallet subscription verification is unavailable. Retry shortly.", "subscription_verification_unavailable"),
-                 ("An active METER Plugin subscription is required for this user and country ($599/month). Manage subscriptions: https://window.wallet.meter.ad/plugin", "subscription_required"),
+                 ("METER access is not available for this account and country. Contact your METER account administrator.", "subscription_required"),
+                 ("MCP error -32600: METER access is not available for this account and country. Contact your METER account administrator.", "subscription_required"),
+                 ("METER access is not available for this account and country. Contact your METER account administrator. Buy access now", "mcp_rpc_error"),
                  ("unknown error with private SQL", "mcp_rpc_error")]
         for message, expected in cases:
             result = kind(fixture({"error": {"code": -32600, "message": message}}, layer="mcp_rpc"))
