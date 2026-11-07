@@ -16,6 +16,10 @@ METER metrics are extrapolated from panel devices to the population using weight
 
 Common audience dimensions include age, gender, income, residency, and available behavioral or interest segments. Income categories in internal METER data commonly use A (lower quartile), B (middle 50%), C (upper quartile), or combined `abc`. Preserve the audience requested by the user. These aggregate planning dimensions do not provide personal tracking, footfall, device, dwell-time, visit or movement-flow exports.
 
+## New OTS Reach series
+
+Some New OTS responses expose several audience series. Read their `contactBasis`, `kind` and `units` before selecting one: `spectra.modeled_ots` is modeled-contact Reach, `spectra.modeled_lts` is modeled LTS Reach, and `spectra.exposure`/`exposure` describe exposure Reach. When the response identifies top-level `reach` as the exposure series, label it as exposure Reach rather than silently presenting it as modeled-contact Reach. Do not mix a modeled contact distribution from `contactModel.ots` with the exposure Reach series or replace one with the other during comparisons. State which series was used; a separately labeled comparison is allowed. Preserve the response-specific Universe and any population-basis or planning-profile limitations. A different series is not automatically an error, and this distinction does not change legacy tool routing.
+
 ## Arithmetic verification
 
 Report Reach percentages by default. Only add derived people counts after checking each raw Reach fraction multiplied by its own calculation Universe using a calculator or code. If arithmetic cannot be checked, omit the people count rather than estimating it mentally. Never multiply a displayed percentage directly by Universe; divide it by 100 first.

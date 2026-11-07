@@ -8,9 +8,7 @@
 
 Plan outdoor advertising with METER in Claude Code, Cowork, ChatGPT and Codex. Discover OOH/DOOH inventory, calculate projected audience Universe, OTS and Reach, inspect audience profiles, and prepare address-program spreadsheets from validated results.
 
-**Requires a METER account and an active Plugin subscription: $599 per user, per country, per month.** [Purchase or manage subscriptions in Wallet](https://window.wallet.meter.ad/plugin). Sign in with the same METER identity in Wallet and your assistant. Choose the licensed user and country before confirming. Installing the plugin does not grant data access.
-
-A team can pay from its Wallet account subject to its team budget; the license covers only the selected user and country. Each country renews independently. Cancellation keeps access until the paid period ends. Wallet shows the final top-up quote, currency conversion and applicable fees before payment.
+Requires a connected existing METER account with access to the requested tools and country. Installing the plugin grants no additional data access. It provides analytical planning, with no subscription sales, upgrades, checkout, advertising booking, payments or advertisements.
 
 ## Install in Claude Code
 
@@ -33,8 +31,8 @@ Use the plugin's released ZIP with Cowork's plugin upload flow, or install from 
 
 ## Try it
 
-- “Find up to three available inventory records in Ташкент. Show their METER IDs, addresses and actual OOH/DOOH classification.”
-- “Calculate the audience Universe in Ташкент for ages 20–45, all genders and income abc, for 1–31 August 2026.”
+- “Find up to three inventory records in Ташкент. Show their METER IDs, addresses and actual OOH/DOOH classification.”
+- “Calculate the audience Universe in Ташкент for ages 20–45, all genders and income abc.”
 - “Using those exact surface IDs, calculate legacy OTS and Reach for the same audience and period. Label modeled contacts separately from unique audience.”
 - “Create an XLSX address program from those results, with campaign totals, an inventory table and a numbered city map.”
 
@@ -61,7 +59,7 @@ Historical small-scenario API measurements were roughly <1 second for simple que
 First identify the requested connection and the failing layer. A different METER integration's result does not validate this package, a website-root 404 does not test the MCP endpoint, and a successful status/docs probe does not validate campaign calculations. The [diagnostics guide](skills/meter/references/diagnostics.md) distinguishes these cases and provides an optional read-only local classifier. Its package version resource identifies those files; installed skills, MCP server and calculation service versions are separate observations.
 
 - **Client authentication / MCP endpoint HTTP 401:** reconnect METER in the client’s connection settings (`/mcp` in Claude Code) and complete OAuth. A 401 inside a tool's upstream API result does not by itself establish a client login failure.
-- **Subscription required:** open [Wallet](https://window.wallet.meter.ad/plugin), check the licensed user and country, and purchase or fund the recorded payer for renewal. Reinstalling or signing in repeatedly does not activate a license.
+- **Existing access required:** explain that the capability is unavailable under the signed-in account’s current entitlements. Check existing access with the account administrator; do not start a subscription, upgrade or payment flow. Reinstalling or repeated sign-in does not change entitlements.
 - **Wallet verification unavailable:** try again shortly; an outage does not grant temporary data access.
 - **Access denied / invalid country scope:** ask your METER administrator to check your existing account's tool and country permissions. Installing again does not grant permissions.
 - **New OTS no_data:** consult the country guide. Use equivalent legacy once if the task permits; IT/MA retain the unavailable result without automatic legacy fallback. Do not invent metrics.

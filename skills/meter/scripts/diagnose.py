@@ -119,8 +119,8 @@ def classify(observation, legacy_allowed):
             return set_kind("access_denied", "inspect_request_scope_then_access")
         if code == -32600 and message == "Wallet subscription verification is unavailable. Retry shortly.":
             return set_kind("subscription_verification_unavailable", "retry_subscription_check_later")
-        if code == -32600 and isinstance(message, str) and re.fullmatch(
-                r"An active METER Plugin subscription is required for this user and country \(\$[0-9]+/month\)\. Manage subscriptions: https://window\.wallet\.meter\.ad/plugin", message):
+        access_message = "METER access is not available for this account and country. Contact your METER account administrator."
+        if code == -32600 and message in (access_message, "MCP error -32600: " + access_message):
             return set_kind("subscription_required", "check_subscription_for_signed_in_user_and_country")
         return set_kind("mcp_rpc_error", "inspect_retained_observation")
     status, ok = response.get("status"), response.get("ok")

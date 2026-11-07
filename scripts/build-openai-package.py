@@ -27,7 +27,7 @@ manifest.update({
     "interface": {
         "displayName": "METER",
         "shortDescription": "OOH audience and planning",
-        "longDescription": "METER helps media planners discover OOH/DOOH inventory, calculate projected audience Universe, OTS and Reach, and prepare address programs from validated results. A connected METER account with access to the requested country is required. Dated routing examples cover 24 countries; Italy and Morocco default to New OTS and the other 22 to legacy. Explicit methods are preserved; other geos remain unverified. Unavailable results and country-specific fallback limits are disclosed. Spreadsheet exports require file-authoring tools in the client. METER does not book or purchase advertising placements.",
+        "longDescription": submission["app_info"]["description"],
         "developerName": "GEOMOTIVE",
         "category": "Data & Analytics",
         "capabilities": ["Read"],
@@ -58,6 +58,13 @@ manifest["extensions"] = {"com.openai": {"review": {"test_cases": {
     "positive": [review_case(case) for case in submission["test_cases"]],
     "negative": [review_case(case) for case in submission["negative_test_cases"]],
 }}}}
+manifest["extensions"]["com.openai"]["review"].update({
+    "commerce": False,
+    "commerce_description": "Analytical research for existing METER accounts only. The plugin retrieves inventory and computes aggregate projected audience metrics. It does not serve ads, sell or book placements, sell subscriptions, promote upgrades, or provide checkout, top-ups or payments. Existing entitlements are enforced; unavailable access is explained without a purchase flow.",
+})
+manifest["extensions"]["com.openai"]["publication"] = {
+    "release_notes": "1.0.4: removes subscription pricing and transactional guidance; clarifies existing-account analytical access; synchronizes reviewer cases and explicit campaign controls; makes New OTS fallback conditional. Server rollout and ChatGPT web/mobile reviewer replay are tracked separately and must be verified before submission."
+}
 # Only include publisher-approved optional fields when supplied in the source.
 if "license" in source_manifest:
     manifest["license"] = source_manifest["license"]
@@ -71,7 +78,7 @@ for directory in ("skills", "assets"):
             raise ValueError("Symlinks are not accepted in the distribution source")
         if path.is_file():
             expected[str(path.relative_to(root))] = path.read_bytes()
-for name in ("NOTICE", "SECURITY.md", "docs/data-handling.md", "docs/verification.md", "docs/openai-verification.md"):
+for name in ("NOTICE", "SECURITY.md", "docs/data-handling.md", "docs/verification.md", "docs/openai-verification.md", "docs/reviewer-test-runbook.md"):
     expected[name] = (root / name).read_bytes()
 expected["README.md"] = (root / "docs/openai-package.md").read_text().replace("(../", "(").encode()
 if (root / "LICENSE").exists():
