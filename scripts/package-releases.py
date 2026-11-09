@@ -27,6 +27,8 @@ codex_files = {str(p.relative_to(openai)): p for p in openai.rglob("*") if p.is_
 # The current OpenAI publisher portal accepts the complete Codex archive.
 skill_root = openai / "skills/meter"
 skills_files = {str(p.relative_to(skill_root)): p for p in skill_root.rglob("*") if p.is_file()}
+if (root / "LICENSE").is_file():
+    skills_files["LICENSE"] = root / "LICENSE"
 claude_files = {}
 for directory in ("skills", "assets", "docs"):
     for p in (root / directory).rglob("*"):
@@ -34,6 +36,8 @@ for directory in ("skills", "assets", "docs"):
             claude_files[str(p.relative_to(root))] = p
 for name in (".claude-plugin/plugin.json", ".mcp.json", "README.md", "NOTICE", "SECURITY.md", "chatgpt-app-submission.json"):
     claude_files[name] = root / name
+if (root / "LICENSE").is_file():
+    claude_files["LICENSE"] = root / "LICENSE"
 # Root README links to the generated package; include that public package, never .git or private files.
 for name, p in codex_files.items():
     claude_files["plugins/meter/" + name] = p

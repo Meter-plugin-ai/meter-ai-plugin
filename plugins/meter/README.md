@@ -51,3 +51,5 @@ See [metric definitions](skills/meter/references/metrics.md), [routing](skills/m
 ## Source and support
 
 [Source repository](https://github.com/Meter-plugin-ai/meter-ai-plugin). Product and account information: [METER](https://meter.ad). Report non-sensitive package defects through GitHub issues and security issues through private vulnerability reporting. Contact your METER account administrator for data permissions and applicable service privacy terms.
+
+The client plugin is licensed under [GNU Affero General Public License version 3 only](LICENSE) (`AGPL-3.0-only`). Hosted services and datasets are separate from the client package.

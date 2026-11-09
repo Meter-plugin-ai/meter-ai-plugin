@@ -18,6 +18,10 @@ No ad buying/booking, personal tracking, permit-owner matching or direct databas
 
 ## Claude directory submission fields
 
+For current submissions, use the [developer portal](https://claude.ai/directory/manage) and the [current submission guide](https://claude.com/docs/plugins/submit). The client is licensed under [AGPL-3.0-only](../LICENSE); the manifest declares the license and privacy-policy URL. An earlier Console submission with a Withdraw button must be withdrawn when migrating to the new portal, after the replacement is prepared. Keep the plugin name and repository path stable. Automated policy holds require reviewer assessment and are distinct from blocking validation errors.
+
+The following table records the earlier Console form; its optional-license field and review status are historical.
+
 Submitted on 8 September 2026 through the [official submission form](https://platform.claude.com/plugins/submit), after the publisher accepted Anthropic's Software Directory Terms. The [submission list](https://platform.claude.com/plugins/submissions) shows **METER — Submitted and pending review**. This is an application for review, not directory approval or publication.
 
 | Field or reference | Value |
