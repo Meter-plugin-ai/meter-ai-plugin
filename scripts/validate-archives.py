@@ -30,7 +30,14 @@ for archive in archives:
         skill_root = root / "skills/meter"
         skill_files = {str(p.relative_to(skill_root)): p.read_bytes() for p in skill_root.rglob("*") if p.is_file()}
         packaged_skill = {name[len(skill_prefix):] for name in names if name.startswith(skill_prefix)}
-        assert packaged_skill == set(skill_files), (archive.name, "incomplete or extra skill resources")
+        expected_skill_names = set(skill_files)
+        if "openai-skills" in archive.name and (root / "LICENSE").is_file():
+            expected_skill_names.add("LICENSE")
+        assert packaged_skill == expected_skill_names, (archive.name, "incomplete or extra skill resources")
+        if (root / "LICENSE").is_file():
+            assert z.read("LICENSE") == (root / "LICENSE").read_bytes(), (archive.name, "missing or stale license")
+            if "claude" in archive.name:
+                assert z.read("plugins/meter/LICENSE") == (root / "LICENSE").read_bytes(), "nested package license"
         if "claude" in archive.name:
             nested_prefix = "plugins/meter/skills/meter/"
             nested_skill = {name[len(nested_prefix):] for name in names if name.startswith(nested_prefix)}
@@ -54,6 +61,8 @@ for archive in archives:
             assert "SKILL.md" in names, "OpenAI expects a skill directory at the archive root"
             source = root / "plugins/meter/skills/meter"
             expected = {str(p.relative_to(source)): p.read_bytes() for p in source.rglob("*") if p.is_file()}
+            if (root / "LICENSE").is_file():
+                expected["LICENSE"] = (root / "LICENSE").read_bytes()
             assert set(names) == set(expected), "Incomplete or extra skill archive contents"
             for name, content in expected.items():
                 assert z.read(name) == content, (name, "skill differs from tested source")

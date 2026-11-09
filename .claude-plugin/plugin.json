@@ -1,6 +1,8 @@
 {
   "name": "meter",
-  "version": "1.0.4",
+  "version": "1.0.5",
+  "license": "AGPL-3.0-only",
+  "privacyPolicyUrl": "https://meter.ad/privacy-policy",
   "description": "Use an existing METER account to research OOH/DOOH inventory and calculate projected audience, OTS and Reach. Provides analytical planning only; no advertising placement, subscription purchase, upgrade or payment workflow.",
   "author": {
     "name": "METER",

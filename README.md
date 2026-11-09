@@ -80,3 +80,7 @@ PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v
 ```
 
 See [reviewer scenarios](docs/reviewer-guide.md) and [verification evidence](docs/verification.md). This repository contains only the client plugin; hosted METER services and datasets are separate.
+
+## License
+
+The client plugin in this repository is licensed under [GNU Affero General Public License version 3 only](LICENSE) (`AGPL-3.0-only`). Hosted METER services and datasets are separate from this repository; using them requires an existing account with the applicable access and service terms.

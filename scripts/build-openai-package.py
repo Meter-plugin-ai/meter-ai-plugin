@@ -63,7 +63,7 @@ manifest["extensions"]["com.openai"]["review"].update({
     "commerce_description": "Analytical research for existing METER accounts only. The plugin retrieves inventory and computes aggregate projected audience metrics. It does not serve ads, sell or book placements, sell subscriptions, promote upgrades, or provide checkout, top-ups or payments. Existing entitlements are enforced; unavailable access is explained without a purchase flow.",
 })
 manifest["extensions"]["com.openai"]["publication"] = {
-    "release_notes": "1.0.4: removes subscription pricing and transactional guidance; clarifies existing-account analytical access; synchronizes reviewer cases and explicit campaign controls; makes New OTS fallback conditional. Server rollout and ChatGPT web/mobile reviewer replay are tracked separately and must be verified before submission."
+    "release_notes": "1.0.5: licenses the client plugin under AGPL-3.0-only and includes the license in every distribution. Retains the existing-account analytical access policy, synchronized reviewer cases, explicit campaign controls and conditional New OTS fallback. Reviewer-client replay and portal review remain separate verification steps."
 }
 # Only include publisher-approved optional fields when supplied in the source.
 if "license" in source_manifest:
