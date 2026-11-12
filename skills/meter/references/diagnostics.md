@@ -29,6 +29,7 @@ Different component versions alone do not establish incompatibility. Unobserved 
 | `meter_status` success at `/api/v4` or `/api/v4/docs/doc.json` | Establishes status-route or documentation reachability respectively. Neither validates inventory permissions, subscription entitlement or a requested campaign calculation. |
 | HTTP 404 at the website root | Does not test `https://mcp.meter.ad/meter/mcp`. Verify the configured endpoint before diagnosing an MCP route failure. |
 | Tool status 0 with `connection_error`, `timeout` or `cancelled` | Report the distinct failure and failed operation; retain earlier valid results. No unchanged automatic retry. This evidence alone does not identify the infrastructure cause or a memory crash. |
+| `meter_query_surfaces` `country_inventory_unavailable` | Country-only inventory requires the API country filter capability. Explain that the national query is not yet available on this deployment. |
 | `meter_query_surfaces` `response_too_large` | Reduce the page limit, preserve `skip` and avoid duplicating completed pages. |
 | `meter_query_surfaces` `inventory_scan_limit` | Narrow filters and restart pagination at `skip: 0`; never claim the unfinished scan is complete. |
 | Explicit `status: no_data` | Unavailable under that method. Consult [country coverage](country-coverage.md): for New OTS, suggest equivalent legacy once only when the brief permits it; IT/MA have no automatic legacy fallback because their audited legacy examples were zero. Preserve audience, period, IDs and controls. |

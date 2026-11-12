@@ -4,37 +4,23 @@ Use the user's connected METER MCP tools. A country-wide request such as «Ск�
 
 ## Build a supported query
 
-For `meter_query_surfaces`, send the authorized `countryCode` plus at least one of:
-
-- `city`: the exact city spelling stored in inventory, recovered from the task or a trusted inventory source;
-- `id`: an actual METER surface ID supplied by the user or returned by inventory.
-
-Address and description are additional filters, not standalone geography selectors. Every supplied selector must resolve to the declared country. Do not use a guessed ID, an empty city, a wildcard, or a country name in `city`. An alias resolving to a country does not prove that it matches inventory city spelling.
-
-Example for a user request concerning Tashkent:
+For national inventory, use the authorized country code without a city or ID:
 
 ```json
-{"countryCode":"UZ","city":"Ташкент","limit":50,"skip":0}
+{"countryCode":"UZ","limit":50,"skip":0}
 ```
 
-`countryCode` selects the authorization boundary; it does not itself provide the city/ID evidence required by the resolver. Sending only `{"countryCode":"UZ","limit":50,"skip":0}` currently produces `EMPTY_SCOPE` internally and a generic `Tool access denied` to the caller, despite the city and ID fields appearing optional in the tool schema. This behavior was reproduced on 2026-10-26; do not infer the cause of every future denial from that observation.
+For a city or individual surface include its exact inventory city spelling or an actual surface ID. City and ID selectors must resolve to the declared country. Never guess IDs or use a country name as a city. Address and description require a city or ID.
 
-## Preserve country-wide scope
+Use `limit <= 50`, beginning at `skip=0`. Advance by the number of rows returned until a successful short page. Check IDs across pages for duplicates or reversals. Inventory may change during pagination, so disclose that a multi-page result is not a frozen snapshot. An error, duplicate, reversal, or incomplete scan cannot establish a national total. If `country_inventory_unavailable` occurs, the upstream does not yet support the country filter; explain the limitation and use a complete trusted city roster only when one is available. Do not infer completeness from a list of major cities.
 
-1. Recover any agreed city list or authoritative inventory roster already available in the task. Use current supported tools if they expose a country-wide inventory or complete city catalog; do not invent such an endpoint.
-2. If an authoritative, complete inventory city list is available, query each city in the requested country and paginate each query. Record the source and coverage of that list. A list of familiar or major cities is not a complete national roster.
-3. If only a partial list is available, label any retrieved results as partial and name the covered cities. Do not report a national total. If there is no usable list, explain the current country-query limitation and ask for the city scope or a complete inventory export; do not silently substitute Tashkent for Uzbekistan or Almaty for Kazakhstan.
-4. A user-provided inventory export can supply a roster or a separately labeled snapshot when appropriate to the request. Disclose its date, unit, filters and coverage. This plugin does not include direct database access. Do not switch sources to evade an authorization denial or disregard a request to use only the OAuth plugin.
-
-For each city use `limit <= 50`, starting at `skip=0`. Advance `skip` by the number of returned rows and stop on a successful short page. A failed page is incomplete retrieval, not zero inventory. On `response_too_large`, retry with a smaller limit at the same offset; if limit 1 fails, report the unresolved page instead of looping. An empty page for an unverified city spelling is not proof that the city has no inventory.
-
-For counts, retrieve all pages before applying digital/type/status filters and counting. Deduplicate repeated rows by the actual surface ID; preserve different sides with different IDs. Do not equate surface records, physical constructions and screens. Use an authoritative grouping key or state that only surface records can be counted. Preserve dismantled/decommissioned warnings and disclose exclusions. A complete city extract does not establish national completeness or bookable availability.
+For counts, filter actual returned digital/type/status fields after retrieving the pages. Keep different sides with distinct IDs and do not equate surfaces, screens and physical constructions without an authoritative grouping key. Retain source warnings such as dismantled status. A record does not confirm bookable availability.
 
 ## Handle a generic denial
 
 `MCP -32600: Tool access denied` alone does not distinguish missing permissions from unresolved geography or an unavailable authorization dependency.
 
-- Inspect the submitted arguments first. If a known city/ID from the user's scope was omitted, correct it and retry once. If only a country was requested, follow the country-wide workflow above instead of repeating the same invalid call.
+- Inspect the submitted arguments first. If a known city/ID from the user's scope was omitted, correct it and retry once. For a country-only request, verify whether the server supports the national inventory path; retain the actual error.
 - Do not retry unchanged denials or cycle through countries, identities, credentials, or direct API routes. If a correctly scoped request still fails, report the tool, sanitized selectors and observed error. Use available read-only diagnostics to distinguish the cause; otherwise leave it unresolved.
 - A successful `meter_status` proves reachability only. A successful city inventory call proves that this connection can execute that particular request; it does not validate every tool or all national inventory.
 - If server diagnostics are available, `country_scope_resolution_failed` with `EMPTY_SCOPE` indicates missing geography evidence; `UNKNOWN_SELECTOR`, `UNSAFE_SELECTOR` and `MIXED_COUNTRIES` require inspecting the selectors. Explicit denied authorization decisions, subscription messages and backend failures are different evidence and should retain their actual meaning.
