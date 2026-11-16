@@ -1,6 +1,6 @@
 {
   "name": "meter",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Plan outdoor advertising with METER: discover OOH/DOOH inventory, calculate projected audience, OTS and Reach, and prepare address programs.",
   "author": {
     "name": "METER",
@@ -22,7 +22,7 @@
     "displayName": "METER",
     "shortDescription": "OOH audience and planning",
     "longDescription": "METER provides analytical research for outdoor media planners: sourced OOH/DOOH inventory and projected audience Universe, contacts (OTS), Reach and address programs. Sign in to an existing METER account with access to the requested tools and country. It does not serve advertisements, sell or book placements, sell subscriptions, promote upgrades, or provide checkout or payments. Calculation coverage varies by method; unavailable results are disclosed. File exports require client file-authoring capabilities.",
-    "developerName": "GEOMOTIVE",
+    "developerName": "METER",
     "category": "Data & Analytics",
     "capabilities": [
       "Read"
@@ -98,7 +98,7 @@
         "commerce_description": "Analytical research for existing METER accounts only. The plugin retrieves inventory and computes aggregate projected audience metrics. It does not serve ads, sell or book placements, sell subscriptions, promote upgrades, or provide checkout, top-ups or payments. Existing entitlements are enforced; unavailable access is explained without a purchase flow."
       },
       "publication": {
-        "release_notes": "1.0.6: supports country-wide inventory requests with authorized, paginated results when the hosted service supports the country filter. Retains existing-account analytical access and the AGPL-3.0-only client license. Reviewer-client replay and portal review remain separate verification steps."
+        "release_notes": "1.0.7: corrects the displayed developer name to METER. The website remains https://meter.ad."
       }
     }
   },

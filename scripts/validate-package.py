@@ -37,6 +37,8 @@ assert openai_manifest["version"] == manifest["version"]
 assert openai_manifest["interface"]["capabilities"] == ["Read"]
 assert openai_manifest["mcpServers"] == "./.mcp.json"
 interface = openai_manifest["interface"]
+assert interface["developerName"] == "METER"
+assert interface["websiteURL"] == "https://meter.ad"
 for field in ("websiteURL", "supportURL", "privacyPolicyURL", "termsOfServiceURL"):
     assert interface[field].startswith("https://"), (field, "required listing URL")
 assert 0 < len(interface["shortDescription"]) <= 30
