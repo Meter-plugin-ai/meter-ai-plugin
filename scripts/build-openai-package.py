@@ -63,7 +63,7 @@ manifest["extensions"]["com.openai"]["review"].update({
     "commerce_description": "Analytical research for existing METER accounts only. The plugin retrieves inventory and computes aggregate projected audience metrics. It does not serve ads, sell or book placements, sell subscriptions, promote upgrades, or provide checkout, top-ups or payments. Existing entitlements are enforced; unavailable access is explained without a purchase flow.",
 })
 manifest["extensions"]["com.openai"]["publication"] = {
-    "release_notes": "1.0.7: corrects the displayed developer name to METER. The website remains https://meter.ad."
+    "release_notes": "1.0.8: clarifies geographic inputs for surface selection and country-wide inventory."
 }
 # Only include publisher-approved optional fields when supplied in the source.
 if "license" in source_manifest:
