@@ -8,8 +8,8 @@ Unlisted countries remain unverified. If no current evidence or explicit method 
 
 ## Inventory and setup
 
-- `meter_query_surfaces`: send `countryCode` plus a real surface `id` or exact inventory `city`; description and address only refine that scope. For national searches/counts, pagination and generic access-denied errors, follow [inventory-requests.md](inventory-requests.md).
-- `meter_collect_surfaces`: select and rank surfaces under audience, geography, and campaign constraints.
+- `meter_query_surfaces`: send `countryCode` alone for country-wide inventory or add a real surface `id` or exact inventory `city`; description and address require a city or ID. For pagination and generic access-denied errors, follow [inventory-requests.md](inventory-requests.md).
+- `meter_collect_surfaces`: select and rank surfaces under audience, geography, and campaign constraints. Supply `countryCode` plus the exact inventory `city` or a nonempty `filters.surfaces` list of authorized IDs. Country alone does not constrain selection; follow [inventory-requests.md](inventory-requests.md).
 - `meter_universe`: calculate the projected audience Universe for filters before interpreting ratings or reach.
 
 Preserve source warnings such as `демонтирован` (dismantled), unavailable or inactive in every selection and result table that includes the surface, including later campaign and per-surface answers. A returned record is not confirmation that placement is available. When a request selects up to three records, label it as a limited sample and disclose pagination/coverage limits; do not present it as complete city inventory.
